@@ -1,0 +1,14 @@
+"$schema" = "schemas/schema.json"
+
+[default]
+description = "Allows playing, stopping, pausing, resuming, and changing volume for sounds."
+permissions = [
+  "allow-play-once",
+  "allow-play-loop",
+  "allow-stop",
+  "allow-stop-all",
+  "allow-set-volume",
+  "allow-pause",
+  "allow-resume",
+  "allow-is-finished",
+]

@@ -1,0 +1,13 @@
+# Automatically generated - DO NOT EDIT!
+
+"$schema" = "../../schemas/schema.json"
+
+[[permission]]
+identifier = "allow-is-finished"
+description = "Enables the is_finished command without any pre-configured scope."
+commands.allow = ["is_finished"]
+
+[[permission]]
+identifier = "deny-is-finished"
+description = "Denies the is_finished command without any pre-configured scope."
+commands.deny = ["is_finished"]

@@ -1,0 +1,13 @@
+# Automatically generated - DO NOT EDIT!
+
+"$schema" = "../../schemas/schema.json"
+
+[[permission]]
+identifier = "allow-play-loop"
+description = "Enables the play_loop command without any pre-configured scope."
+commands.allow = ["play_loop"]
+
+[[permission]]
+identifier = "deny-play-loop"
+description = "Denies the play_loop command without any pre-configured scope."
+commands.deny = ["play_loop"]

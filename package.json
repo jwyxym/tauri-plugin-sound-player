@@ -1,0 +1,19 @@
+{
+  "name": "tauri-plugin-sound-player",
+  "version": "0.1.0",
+  "type": "module",
+  "files": [
+    "webview-dist"
+  ],
+  "main": "webview-dist/index.js",
+  "types": "webview-dist/index.d.ts",
+  "scripts": {
+    "build": "tsc"
+  },
+  "devDependencies": {
+    "typescript": "5.4.5"
+  },
+  "dependencies": {
+    "@tauri-apps/api": "^2.0.0"
+  }
+}
