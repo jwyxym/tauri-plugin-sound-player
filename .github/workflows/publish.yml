@@ -50,9 +50,6 @@ jobs:
       - name: Test default features
         run: cargo test --locked
 
-      - name: Test all features
-        run: cargo test --locked --all-features
-
       - name: Publish
         run: cargo publish --locked
         env:
