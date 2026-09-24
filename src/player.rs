@@ -11,10 +11,11 @@ use std::{
 };
 
 use parking_lot::Mutex;
-use rodio::{Decoder, DeviceSinkBuilder, MixerDeviceSink, Player, Source};
+use rodio::{Decoder, Player, Source};
 use serde::Serialize;
 
 use crate::Result;
+use crate::output::AudioOutput;
 
 #[derive(Clone, Copy, Debug, Eq, Hash, PartialEq, Serialize)]
 pub struct SoundId(u64);
@@ -38,7 +39,7 @@ pub enum PlayMode {
 }
 
 pub struct SoundPlayer {
-    stream: MixerDeviceSink,
+	stream: AudioOutput,
     next_id: AtomicU64,
     players: Mutex<HashMap<SoundId, SoundHandle>>,
 }
@@ -48,7 +49,7 @@ pub type SoundPlayerState = SoundPlayer;
 impl SoundPlayer {
     pub fn new() -> Result<Self> {
         Ok(Self {
-            stream: DeviceSinkBuilder::open_default_sink()?,
+			stream: AudioOutput::new()?,
             next_id: AtomicU64::new(1),
             players: Mutex::new(HashMap::new()),
         })
@@ -74,7 +75,8 @@ impl SoundPlayer {
             PlayMode::Loop => player.append(decoder.repeat_infinite()),
         }
 
-        let id = self.next_sound_id();
+		self.stream.track_player(&player);
+		let id = self.next_sound_id();
         let handle = SoundHandle { id, player };
         self.players.lock().insert(id, handle);
 

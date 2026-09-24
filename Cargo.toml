@@ -1,6 +1,6 @@
 [package]
 name = "tauri-plugin-sound-player"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2024"
 links = "tauri-plugin-sound-player"
 license = "MIT"

@@ -4,6 +4,19 @@ A Tauri v2 plugin for cross-platform sound playback powered by `rodio`.
 
 It supports one-shot playback, loop playback, live volume changes, pause/resume/stop, concurrent playback through a shared mixer, and mp3/ogg/wav files.
 
+Playback automatically follows changes to the system default output device. While sounds are
+playing, the plugin checks every 500 ms and reconnects the existing mixer, preserving sound IDs, playback position,
+volume, loop mode, and pause state. Switching may cause a brief audible gap; audio already
+buffered by the old device cannot be recovered. If no output is available, playback waits
+for a device to return. Failed reconnections are retried automatically. An output device is
+still required when the plugin initializes. No frontend API changes are required, and explicit
+selection of a non-default device is not currently exposed.
+
+When all sounds have finished, stopped, or paused, periodic checks inspect only in-memory
+player state and skip system device queries. Device checks resume within the next 500 ms
+after starting or resuming playback; an output changed while idle may therefore briefly
+use the previous device. The audio stream remains open while idle.
+
 ## Install
 
 Add the Rust plugin crate to your Tauri app:
@@ -11,7 +24,7 @@ Add the Rust plugin crate to your Tauri app:
 ```toml
 # src-tauri/Cargo.toml
 [dependencies]
-tauri-plugin-sound-player = { path = "../tauri-plugin-sound-player" }
+tauri-plugin-sound-player = "0.1.1"
 ```
 
 Register the plugin:

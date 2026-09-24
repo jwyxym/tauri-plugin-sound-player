@@ -5,6 +5,7 @@ use tauri::{
 
 mod commands;
 pub mod error;
+mod output;
 mod player;
 
 pub use error::{Error, Result};

@@ -10,6 +10,9 @@ pub enum Error {
     #[error("failed to initialize audio output: {0}")]
     OutputStream(#[from] rodio::DeviceSinkError),
 
+	#[error("audio output worker failed: {0}")]
+	OutputWorker(String),
+
     #[error("failed to open audio file: {0}")]
     Io(#[from] std::io::Error),
 
